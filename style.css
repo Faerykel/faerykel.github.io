@@ -121,7 +121,7 @@ section {
 }
 
 /* Mensagem de confirmação */
-#mensagem-confirmacao {
+#mensagem-confirmação {
     display: none;
     color: #28a745;
     font-weight: bold;
