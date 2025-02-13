@@ -2,6 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();  // Para carregar as variáveis de ambiente do .env
 
 const app = express();
 const port = 3000;
@@ -15,8 +16,8 @@ app.use(express.static('public'));  // Para servir os arquivos estáticos do fro
 const transporter = nodemailer.createTransport({
     service: 'gmail', // Ou o serviço de e-mail que você estiver usando
     auth: {
-        user: 'seu-email@gmail.com', // Coloque seu e-mail
-        pass: 'sua-senha-ou-app-password' // Coloque a senha ou senha do aplicativo
+        user: process.env.EMAIL_USER, // Usando variável de ambiente
+        pass: process.env.EMAIL_PASS  // Usando variável de ambiente
     }
 });
 
@@ -25,8 +26,8 @@ app.post('/enviar-email', (req, res) => {
     const { nome, email, mensagem } = req.body;
 
     const mailOptions = {
-        from: 'seu-email@gmail.com', // Seu e-mail
-        to: 'email-destino@example.com', // Para onde vai o e-mail
+        from: process.env.EMAIL_USER, // Usando variável de ambiente
+        to: 'raquel.rlima97@gmail.com', // Para onde vai o e-mail
         subject: `Mensagem de ${nome} - ${email}`,
         text: mensagem
     };
